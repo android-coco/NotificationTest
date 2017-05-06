@@ -13,8 +13,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.NotificationCompat;
 import android.view.View;
 
-import java.io.File;
-
 public class MainActivity extends AppCompatActivity
 {
 
@@ -63,20 +61,21 @@ public class MainActivity extends AppCompatActivity
                 //是否自动消失
                 .setAutoCancel(true)
                 //通知生成时候发送一个声音
-                .setSound(Uri.fromFile(new File("/system/media/audio/ringtones/Luna.ogg")))
+                //.setSound(Uri.fromFile(new File("/system/media/audio/ringtones/Luna.ogg")))
+                .setSound(Uri.parse("android.resource://" + getPackageName() + "/" +R.raw.newmsg))
                 //震动
                 .setVibrate(new long[]{0, 1000, 1000, 1000})
                 //LED灯
                 .setLights(Color.GREEN, 1000, 1000)
                 //设置默认的通知声音和震动
-                .setDefaults(Notification.DEFAULT_ALL)
+                //.setDefaults(Notification.DEFAULT_ALL | Notification.FLAG_SHOW_LIGHTS)
                 //设置长文本 图片
                 .setStyle(new NotificationCompat.BigTextStyle().bigText("Learn how to build " +
                         "notifications, send and sync data, and use voice actions. Get the " +
                         "official Android IDE and developer tools to build apps for Android."))
-
-//                .setStyle(new NotificationCompat.BigPictureStyle().bigPicture(BitmapFactory
-//                        .decodeResource(getResources(), R.drawable.big_image)))
+                .setStyle(style)
+                .setStyle(new NotificationCompat.BigPictureStyle().bigPicture(BitmapFactory
+                        .decodeResource(getResources(), R.drawable.big_image)))
                 .setPriority(NotificationCompat.PRIORITY_MAX)
                 .build();
         manager.notify(1, notification);
